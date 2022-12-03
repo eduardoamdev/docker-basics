@@ -1,4 +1,4 @@
-# Conceptos de Docker
+# Los básicos de Docker
 
 ## ¿Qué es Docker?
 
@@ -57,7 +57,7 @@ sudo systemctl status docker
 
 Podemos obtener información acerca de como instalar Docker en Fedora en el siguiente enlace: < https://docs.docker.com/engine/install/fedora/ >.
 
-## Cómo descargar una imágen:
+## Descargar una imágen:
 
 Si queremos utilizar los contenedores, por lo general, deberemos descargarlos de un repositorio para contenedores.
 
@@ -73,6 +73,40 @@ Si, después de que termine el proceso ejecutamos de nuevo el comando < docker i
 
 Si queremos una versión completa también podemos especificarlo en el mismo comando docker pull. En el caso que estamos utilizando como ejemplo vamos a intalar la versión 16 de node. Para ello ejecutamos < docker pull node:16 >.
 
-## Cómo eliminar una imágen:
+## Eliminar una imágen:
 
-Para borrar una imágen ejecutaremos el comando < docker image rm > pasándole como argumento el nombre de la imágen. En el caso de tener varias imágenes procedentes del mismo repositorio especificaremos el TAG de la siguente manera: < docker image rm node:16 >. En caso de que tuviéramos tan solo una imágen de node ejecutaríamos < docker image rm node >.
+Para borrar una imágen ejecutaremos el comando < docker image rm > pasándole como argumento el nombre de la imágen. En el caso de tener varias imágenes procedentes del mismo repositorio especificaremos el TAG de la siguente manera: < docker image rm node:16 >. En caso de que tuviéramos tan solo una imágen de node ejecutaríamos < docker image rm node >. Si queremos eliminar varias imágenes con una única instrucción podemos pasarle a docker image rm tantas imágenes como queramos ya que admite n argumentos.
+
+## Instanciar un contenedor:
+
+Una vez tengamos nuestra imágen el siguiente paso será crear una instancia de esa imágen. Esta instancia constituirá el contenedor propiamente dicho.
+
+Para crear una instancia de la imágen "node" ejecutaremos el comando < docker create node >. Si todo va correctamente esta instrucción nos devolverá una cadena de caracteres que empezará con el id que le ha sido asignado a este nuevo contenedor.
+
+Para listar todos nuestros contenedores utilizaremos el comando < docker ps -a >.
+
+Una vez lo hayamos hecho veremos que aparece nuestro contenedor de node y también apreciaremos que tiene varias propiedades. Una de estas propiedades es un nombre que se le ha asignado. Si queremos que determinar en nombre del contenedor, por ejemplo "node-container", al crearlo usaremos el comando < docker create --name node-container node >.
+
+## Listar contenedores:
+
+Para listar los contenedores arrancados utilizatemos el comando < docker ps >. Este comando nos mostrará únicamente los contenedores que se encuentren arrancados. Si queremos ver todos los contenedores instanciados ejecutaremos < docker ps -a >.
+
+## Arrancar un contenedor:
+
+Para este ejemplo vamos a crear un contenedor de MongoDB, de modo que, en primer lugar, ejecutamos el comando < docker pull mongo > para descargar la imágen oficial de Docker Hub para después instanciar un contenedor llamado mongo-container con la instrucción < docker create --name mongo-container mongo >.
+
+Una vez tengamos el contenedor de mongo preparado ya podemos arrancarlo mediante el comando < docker start mongo-container >.
+
+Si ahora ejecutamos el comando < docker ps > nos aparecerá listado nuestro contenedor.
+
+## Conectarse a un contenedor desde nuestro sistema operativo:
+
+Si nosotros arrancamos un servicio de MongoDB en nuestro sistema operativo este corre por defecto en el puerto 27017 de nuestra máquina. En el caso de que lo arranquemos dentro de un contenedor de Docker sucederá lo mismo con la salvedad de que el puerto será el 27017 de nuestro contenedor.
+
+El problema que tiene esto es que no nos va a ser posible acceder a este servicio desde nuestro sistema operativo de manera directa. Para resolver esto tendremos que mapear uno de los puertos de nuestro sistema operativo a aquel en el que está corriendo MongoDB dentro del docker.
+
+Este mapeo deberá hacerse en el momento de la creación del contenedor de modo que vamos a crear un contenedor llamado mongo-test, indicándo que queremos que el puerto 27016 de nuestro sistema operativo (podría ser cualquier otro que estuviese libre) se mapee al 27017 de esta nueva instancia. Para llevarlo a cabo ejecutaremos el comando < docker create -p27016:27017 --name mongo-test mongo >.
+
+Acto seguido, arrancaremos el contenedor con el comando < docker start mongo-test >.
+
+Ahora ya estamos en disposición de conectarnos a este docker de mongo-test. Como lo vamos a hacer desde nuestro sistema operativo tendremos que apuntar a < mongodb://localhost:27016 >.
