@@ -1,5 +1,7 @@
 # Los básicos de Docker
 
+<img src = "./docker.png"/>
+
 ## ¿Qué es Docker?
 
 Docker es una plataforma de software que le permite crear, probar e implementar aplicaciones rápidamente. Docker empaqueta software en unidades estandarizadas llamadas contenedores que incluyen todo lo necesario para que el software se ejecute, incluidas bibliotecas, herramientas de sistema, código y tiempo de ejecución. Con Docker, puede implementar y ajustar la escala de aplicaciones rápidamente en cualquier entorno con la certeza de saber que su código se ejecutará.
@@ -110,3 +112,17 @@ Este mapeo deberá hacerse en el momento de la creación del contenedor de modo 
 Acto seguido, arrancaremos el contenedor con el comando < docker start mongo-test >.
 
 Ahora ya estamos en disposición de conectarnos a este docker de mongo-test. Como lo vamos a hacer desde nuestro sistema operativo tendremos que apuntar a < mongodb://localhost:27016 >.
+
+## Auditar los logs de un contenedor:
+
+Para ver los logs de un contenedor que tengamos arrancado ejecutaremos < docker logs > seguido del nombre del contenedor. En el caso de que tengamos arrancado el contenedor mongo-test veremos sus logs ejecutando docker logs mongo-test.
+
+Este comando nos mostrará los logs acontencidos hasta ese momento para luego devolvernos de nuevo a la línea de comandos.
+
+Si queremos que docker logs se mantenga a la escucha lanzaremos < docker logs mongo-test --follow >.
+
+## Docker run:
+
+El comando < docker run > contiene las funcionalidades de pull, create y start.Esto quiere decir que si eliminamos nuestros contenedores de mongo y también la imágen para después ejecutar < docker run mongo > se descargará la imaǵen de mongo, se creará un nuevo contenedor y se arrancará de manera inmediata mostrándonos los logs.
+
+Si queremos aplicar las funcionalidades vistas anteeriormente para fijar el nombre del contenedor (por ejemplo, mongo-container) y mapear el puerto de nuestro sistema operativo (en este caso usaremos el 27016) tendremos que ejecutar el comando < docker run --name mongo-container -p27016:27017 mongo >.
