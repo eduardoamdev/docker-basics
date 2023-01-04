@@ -123,6 +123,8 @@ Si queremos que docker logs se mantenga a la escucha lanzaremos < docker logs mo
 
 ## Docker run:
 
-El comando < docker run > contiene las funcionalidades de pull, create y start.Esto quiere decir que si eliminamos nuestros contenedores de mongo y también la imágen para después ejecutar < docker run mongo > se descargará la imaǵen de mongo, se creará un nuevo contenedor y se arrancará de manera inmediata mostrándonos los logs.
+El comando < docker run > contiene las funcionalidades de pull, create y start. Esto quiere decir que si eliminamos nuestros contenedores de mongo y también la imágen para después ejecutar < docker run mongo > se descargará la imaǵen de mongo, se creará un nuevo contenedor y se arrancará de manera inmediata mostrándonos los logs.
 
 Si queremos aplicar las funcionalidades vistas anteeriormente para fijar el nombre del contenedor (por ejemplo, mongo-container) y mapear el puerto de nuestro sistema operativo (en este caso usaremos el 27016) tendremos que ejecutar el comando < docker run --name mongo-container -p27016:27017 mongo >.
+
+Para dejar nuestro contenedor corriendo en segundo plato utilizaremos la opción -p, quedando nuestro comando de la siguiente manera: < docker run -p --name mongo-container -p27016:27017 mongo >. 
