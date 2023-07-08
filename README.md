@@ -149,7 +149,8 @@ sudo usermod -aG docker $USER
 
 ## Mantener el servicio de Docker arrancado por defecto
 
-En algunas distribuciones de Linux el servicio de docker no se arranca por defecto al iniciar sesión. Para evitar tener que ponero en marcha con systemctl cada vez arranquemos el equipo ejecutaremos los siguientes comandos:
+En algunas distribuciones de Linux el servicio de docker no se arranca por defecto al iniciar sesión.
+Para evitar tener que ponero en marcha con systemctl cada vez arranquemos el equipo ejecutaremos los siguientes comandos:
 
 ```sh
 sudo systemctl enable docker.service
