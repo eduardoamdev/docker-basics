@@ -127,4 +127,20 @@ El comando < docker run > contiene las funcionalidades de pull, create y start. 
 
 Si queremos aplicar las funcionalidades vistas anteeriormente para fijar el nombre del contenedor (por ejemplo, mongo-container) y mapear el puerto de nuestro sistema operativo (en este caso usaremos el 27016) tendremos que ejecutar el comando < docker run --name mongo-container -p27016:27017 mongo >.
 
-Para dejar nuestro contenedor corriendo en segundo plato utilizaremos la opción -p, quedando nuestro comando de la siguiente manera: < docker run -p --name mongo-container -p27016:27017 mongo >. 
+Para dejar nuestro contenedor corriendo en segundo plato utilizaremos la opción -p, quedando nuestro comando de la siguiente manera: < docker run -p --name mongo-container -p27016:27017 mongo >.
+
+## Habilitar permisos para tu usuario:
+
+Si vemos que nos resulta necesario utilizar sudo para utilizar Docker tenemos la opción de incluirnos en un grupo. Para hacerlo seguiremos los siguientes pasos:
+
+- Crearemos un grupo para docker
+
+```sh
+sudo groupadd docker
+```
+
+- Añadiremos nuestro usuario al grupo
+
+```sh
+sudo usermod -aG docker $USER
+```
