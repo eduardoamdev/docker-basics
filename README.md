@@ -144,3 +144,6 @@ sudo groupadd docker
 ```sh
 sudo usermod -aG docker $USER
 ```
+
+- Cerrar sesión y volver a entrar
+
