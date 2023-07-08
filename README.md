@@ -147,3 +147,24 @@ sudo usermod -aG docker $USER
 
 - Cerrar sesión y volver a entrar
 
+## Mantener el servicio de Docker arrancado por defecto
+
+En algunas distribuciones de Linux el servicio de docker no se arranca por defecto al iniciar sesión. Para evitar tener que ponero en marcha con systemctl cada vez arranquemos el equipo ejecutaremos los siguientes comandos:
+
+```sh
+sudo systemctl enable docker.service
+```
+
+```sh
+sudo systemctl enable containerd.service
+```
+
+Si queremos revertir estos cambios podemos hacerlo ejecutando los comandos:
+
+```sh
+sudo systemctl disable docker.service
+```
+
+```sh
+sudo systemctl disable containerd.service
+```
